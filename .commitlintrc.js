@@ -62,8 +62,8 @@ module.exports = {
       },
       {
         value: "ci",
-        name: "ci:      🎡 持续集成 | Changes to our CI configuration files and scripts",
-        emoji: ":ferris_wheel:",
+        name: "ci:      👷 持续集成 | Changes to our CI configuration files and scripts",
+        emoji: ":construction_worker:",
       },
       {
         value: "chore",
