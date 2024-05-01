@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`test testing-library:render & snap test > should be able to match snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    test
+  </div>
+</DocumentFragment>
+`;
