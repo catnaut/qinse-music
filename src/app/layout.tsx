@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="text-[14px]">
+    <html lang="en">
       <body className={inter.className}>
         <Header />
         {children}
@@ -30,21 +30,21 @@ import { Nav, Search } from "@/components/main/navbar";
 
 function Header() {
   return (
-    <header className="w-full flex justify-between items-center h-10 px-20">
+    <header className="w-full flex justify-between items-center h-20 px-20">
       <Nav />
       <div className="flex justify-center items-center">
-        <Button className="h-8 p-2" variant={"ghost"}>
+        <Button className="text-lg" variant={"ghost"}>
           <Link href="/">Home</Link>
         </Button>
 
-        <Button className="h-8 p-2" variant={"ghost"} asChild>
+        <Button className="text-lg" variant={"ghost"} asChild>
           <Link href="/discover">Discover</Link>
         </Button>
-        <Button className="h-8 p-2" variant={"ghost"} asChild>
+        <Button className="text-lg" variant={"ghost"} asChild>
           <Link href="/library">Library</Link>
         </Button>
 
-        <Button className="h-8 p-2" variant={"ghost"} asChild>
+        <Button className="text-lg" variant={"ghost"} asChild>
           <Link href="/setting">Setting</Link>
         </Button>
       </div>
