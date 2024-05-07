@@ -27,8 +27,36 @@ export function Search() {
   return (
     <>
       <form onSubmit={handleSubmit(onSearch)}>
-        <Input  {...register("keywords")} className="h-6" />
+        <Input {...register("keywords")} className="h-6" />
       </form>
     </>
+  );
+}
+
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+export function Nav() {
+
+  const router = useRouter();
+
+  const onForward = () => {
+    router.forward();
+  }
+
+  const onBack = () => {
+    router.back();
+  }
+
+  return (
+    <div className="flex justify-center items-center">
+      <Button className="w-8 h-8" variant={"ghost"} size={"icon"} onClick={onForward}>
+        <ChevronLeft className="w-4 h-4" />
+      </Button>
+
+      <Button className="w-8 h-8" variant={"ghost"} size={"icon"} onClick={onBack}>
+        <ChevronRight className="w-4 h-4" />
+      </Button>
+    </div>
   );
 }
