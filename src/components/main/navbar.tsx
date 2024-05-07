@@ -53,12 +53,7 @@ export function Nav() {
         <ChevronLeft className="w-8 h-8" />
       </Button>
 
-      <Button
-        className="w-8 h-8"
-        variant={"ghost"}
-        size={"icon"}
-        onClick={onBack}
-      >
+      <Button variant={"ghost"} size={"icon"} onClick={onBack}>
         <ChevronRight className="w-8 h-8" />
       </Button>
     </div>
