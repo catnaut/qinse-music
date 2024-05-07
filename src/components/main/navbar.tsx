@@ -25,11 +25,11 @@ export function Search() {
     }
   };
   return (
-    <>
-      <form onSubmit={handleSubmit(onSearch)}>
-        <Input {...register("keywords")} />
+    <div className="flex justify-end items-center">
+      <form role="search" onSubmit={handleSubmit(onSearch)}>
+        <Input  {...register("keywords")} />
       </form>
-    </>
+    </div>
   );
 }
 
@@ -48,7 +48,7 @@ export function Nav() {
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-start items-center">
       <Button variant={"ghost"} size={"icon"} onClick={onForward}>
         <ChevronLeft className="w-8 h-8" />
       </Button>
