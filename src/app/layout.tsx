@@ -28,7 +28,7 @@ export default function RootLayout({
   );
 }
 
-export function Header() {
+function Header() {
   return (
     <header className=" fixed w-full flex  items-center  h-20 px-20">
       <div className="flex-1">
