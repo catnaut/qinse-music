@@ -30,7 +30,7 @@ export default function RootLayout({
 
 function Header() {
   return (
-    <header className=" fixed flex h-20  w-full  items-center px-20">
+    <header className=" fixed flex h-20 w-full items-center px-20">
       <div className="flex-1">
         <Nav />
       </div>
