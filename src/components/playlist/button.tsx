@@ -23,7 +23,7 @@ export function MoreMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem>
-          <Share className="mr-2 w-4 h-4" />
+          <Share className="mr-2 h-4 w-4" />
           Share
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -11,8 +11,11 @@ export default function Page() {
   const imgSrc = "/cover.jpg";
 
   return (
-    <main className=" flex px-40 pt-20 flex-col  items-center">
-      <div className="flex w-full pt-10  justify-between h-2/50 space-x-20 items-center">
+    <main className=" flex flex-col items-center px-40  pt-20">
+      <div
+        className="h-2/50 flex
+      w-full items-center justify-between space-x-20 pt-10 "
+      >
         <Image
           src={imgSrc}
           alt="cover"
@@ -20,14 +23,14 @@ export default function Page() {
           height={400}
           className="rounded-lg shadow-lg"
         />
-        <div className=" min-h-full flex-grow flex flex-col py-10 space-y-5">
+        <div className=" flex min-h-full flex-grow flex-col space-y-5 py-10">
           <h1 className="text-5xl">Playlist</h1>
           <p>By {author}</p>
           <p>
             Update at {updateAt} - {amount} songs
           </p>
           <p className="text-sm">{description}</p>
-          <div className="flex justify-start items-center space-x-2">
+          <div className="flex items-center justify-start space-x-2">
             <Button className="text-base">
               <Play className="mr-2" />
               Play
