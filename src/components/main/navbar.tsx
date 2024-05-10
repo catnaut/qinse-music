@@ -25,9 +25,9 @@ export function Search() {
     }
   };
   return (
-    <div className="flex justify-end items-center">
+    <div className="flex items-center justify-end">
       <form role="search" onSubmit={handleSubmit(onSearch)}>
-        <Input  {...register("keywords")} />
+        <Input {...register("keywords")} />
       </form>
     </div>
   );
@@ -48,13 +48,13 @@ export function Nav() {
   };
 
   return (
-    <div className="flex justify-start items-center">
+    <div className="flex items-center justify-start">
       <Button variant={"ghost"} size={"icon"} onClick={onForward}>
-        <ChevronLeft className="w-8 h-8" />
+        <ChevronLeft className="h-8 w-8" />
       </Button>
 
       <Button variant={"ghost"} size={"icon"} onClick={onBack}>
-        <ChevronRight className="w-8 h-8" />
+        <ChevronRight className="h-8 w-8" />
       </Button>
     </div>
   );
