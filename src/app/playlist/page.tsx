@@ -1,7 +1,6 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-
-import { Play, Heart, Ellipsis } from "lucide-react";
+import { Cover } from "@/components/main/cover";
+import { LikeButton, PlayButton } from "@/components/playlist/button.client";
+import { MoreMenu } from "@/components/playlist/button";
 
 export default function Page() {
   const author = "author";
@@ -13,16 +12,10 @@ export default function Page() {
   return (
     <main className=" flex flex-col items-center px-40  pt-20">
       <div
-        className="h-2/50 flex
-      w-full items-center justify-between space-x-20 pt-10 "
+        className="h-2/50 static flex w-full items-center justify-between
+        space-x-20 pt-10"
       >
-        <Image
-          src={imgSrc}
-          alt="cover"
-          width={400}
-          height={400}
-          className="rounded-lg shadow-lg"
-        />
+        <Cover src={imgSrc} />
         <div className=" flex min-h-full flex-grow flex-col space-y-5 py-10">
           <h1 className="text-5xl">Playlist</h1>
           <p>By {author}</p>
@@ -31,19 +24,13 @@ export default function Page() {
           </p>
           <p className="text-sm">{description}</p>
           <div className="flex items-center justify-start space-x-2">
-            <Button className="text-base">
-              <Play className="mr-2" />
-              Play
-            </Button>
-            <Button className="text-base" size={"icon"}>
-              <Heart />
-            </Button>
-            <Button className="text-base" size={"icon"}>
-              <Ellipsis />
-            </Button>
+            <PlayButton />
+            <LikeButton />
+            <MoreMenu />
           </div>
         </div>
       </div>
+      {/* TODO: 歌曲表格 */}
     </main>
   );
 }
