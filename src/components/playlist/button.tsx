@@ -2,28 +2,25 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 import { Button } from "@/components/ui/button";
 
-import { Share } from "lucide-react";
-
-import { Ellipsis } from "lucide-react";
-
 export function MoreMenu() {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>
         <Button className="text-base" size={"icon"}>
-          <Ellipsis />
+          <span className="icon-[material-symbols--more-vert] text-2xl"></span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem>
-          <Share className="mr-2 h-4 w-4" />
+          <span
+            className="icon-[material-symbols--ios-share-rounded]
+          mr-2 text-xl"
+          ></span>
           Share
         </DropdownMenuItem>
       </DropdownMenuContent>
