@@ -2,12 +2,12 @@
 import { z } from "zod";
 import Picture from '../../components/homepage/picture';
 
-const secondImageData = [
+/*（to do 歌单信息）const secondImageData = [
     { url: "/images/song2.jpg", alt: "Song 2", link: "/songs/123126" },
     { url: "/images/song4.jpg", alt: "Song 4", link: "/songs/123127" },
     { url: "/images/song6.jpg", alt: "Song 6", link: "/songs/123128" },
     { url: "/images/song8.jpg", alt: "Song 8", link: "/songs/123125" }
-  ];
+  ];*/
 
 const Song= z.object({
   id: z.string(),
@@ -30,7 +30,7 @@ const SongItem: React.FC<SongItemProps> = ({
     onClick
     })=>{
     return(
-        <div 
+        /*(todo 歌单信息)<div 
             className="
             relative
             group
@@ -60,7 +60,8 @@ const SongItem: React.FC<SongItemProps> = ({
             >
             <Picture imageData={secondImageData} />
             </div>
-        </div>
+        </div>*/
+        <div></div>
 
 
     );
