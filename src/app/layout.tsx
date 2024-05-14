@@ -30,7 +30,7 @@ export default function RootLayout({
 
 function Header() {
   return (
-    <header className=" fixed w-full flex  items-center  h-20 px-20">
+    <header className=" fixed flex h-20  w-full  items-center px-20">
       <div className="flex-1">
         <Nav />
       </div>
@@ -46,7 +46,7 @@ function Header() {
 
 function Pages() {
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex items-center justify-center">
       <Button className="text-lg" variant={"ghost"} asChild>
         <Link href="/">Home</Link>
       </Button>
