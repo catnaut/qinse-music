@@ -1,25 +1,26 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { getLocalPlaceholder } from "@/lib/blur";
 
-export function Cover({ src }: { src: string }) {
-  const imgSrc = src || "/cover.jpg";
+export async function Cover({ src }: { src: string }) {
+  const placeholder = await getLocalPlaceholder("./public/Cover.jpg");
+
   return (
     <div className="group relative h-[400] w-[400]">
       <Image
-        src={imgSrc}
+        src={src}
         alt="cover"
         width={400}
         height={400}
         className="relative rounded-lg"
+        placeholder="blur"
+        blurDataURL={placeholder}
       />
-      {/* TODO: 确认 quality 参数有没有效果 */}
-      {/* TODO: 取消组件自带的 placeholder  */}
       <Image
-        src={imgSrc}
+        src={placeholder}
         alt="shadow"
         width={400}
         height={400}
-        quality={1}
         className="scale-120 absolute left-2 top-2 -z-10 rounded-lg opacity-40
         blur-lg transition group-hover:opacity-70"
       />
