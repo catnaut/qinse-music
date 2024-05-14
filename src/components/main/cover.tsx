@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { getLocalPlaceholder } from "@/lib/blur";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export async function Cover({ src }: { src: string }) {
   const placeholder = await getLocalPlaceholder("./public/Cover.jpg");
@@ -44,4 +45,8 @@ export async function Cover({ src }: { src: string }) {
       </Button>
     </div>
   );
+}
+
+export function CoverSkeleton() {
+  return <Skeleton className="h-[400px] w-[400px]" />;
 }

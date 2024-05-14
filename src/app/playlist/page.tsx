@@ -1,8 +1,9 @@
-import { Cover } from "@/components/main/cover";
+import { Cover, CoverSkeleton } from "@/components/main/cover";
 import { LikeButton, PlayButton } from "@/components/playlist/button.client";
 import { MoreMenu } from "@/components/playlist/button";
+import { Suspense } from "react";
 
-export default function Page() {
+export default async function Page() {
   const author = "author";
   const updateAt = Date.now();
   const amount = 0;
@@ -15,7 +16,9 @@ export default function Page() {
         className="h-2/50 static flex w-full items-center justify-between
         space-x-20 pt-10"
       >
-        <Cover src={imgSrc} />
+        <Suspense fallback={<CoverSkeleton />}>
+          <Cover src={imgSrc} />
+        </Suspense>
         <div className=" flex min-h-full flex-grow flex-col space-y-5 py-10">
           <h1 className="text-5xl">Playlist</h1>
           <p>By {author}</p>
