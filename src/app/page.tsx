@@ -1,7 +1,12 @@
 import React from 'react';
 import Picture from '../components/homepage/picture';
 
+import PageContent from '../components/homepage/pagecontent';
+import SongItem from '../components/homepage/songitem';
+
 const HomePage: React.FC = () => {
+  const songs: any[] = [];
+
   // 第一个图片的数据
   const firstImageData = [
     { url: "/images/song1.jpg", alt: "Song 1", link: "/songs/123123" },
@@ -19,38 +24,37 @@ const HomePage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-blue-100">
-      <main className="flex flex-col justify-start items-start">
-        <div className="featured-songs text-xl">
-          <div className="song mb-4">
-            <div className="flex items-start ">
-              <div className="flex flex-col ml-4">
-                <h1 className="text-3xl text-orange-600">今日热门</h1>
-                <p className="text-xl text-green-600">推荐的歌曲</p>
+    <div className="min-h-screen bg-blue-100">
+      {/* 电脑布局 */}
+
+
+        {/* 主要内容区域 */}
+        <main className="pt-20 flex flex-col justify-start items-start w-full max-w-screen-lg px-4 mx-auto">
+        <div className="
+                    flex
+                    flex-col
+                    gap-y-2
+                    mt-4
+                    md:mt-0
+                    "
+                    >
+                      <p className="hidden md:block font-semibold text-sm">
+                        你好
+                      </p>
+
               </div>
-              {/* 调用 Picture 组件并传递第一个图片数据 */}
-              <Picture imageData={firstImageData} />
-            </div>
-          </div>
-          <br></br>
-          <div className="song mb-4">
-            <div className="flex items-start ">
-              <div className="flex flex-col ml-4">
-                <h1 className="text-3xl text-orange-600">今日热门</h1>
-                <p className="text-xl text-green-600">推荐的歌曲</p>
-              </div>
-              {/* 调用 Picture 组件并传递第二个图片数据 */}
-              <Picture imageData={secondImageData} />
-            </div>
-          </div>
-          {/* 添加更多歌曲 */}
-        </div>
-      </main>
-      <br></br>
-      <footer className={"text-2xl text-center fixed bottom-0 w-full bg-gray-600 text-white p-4"}>
-        <p> My Music App</p>
-      </footer>
-    </div>
+                <PageContent songs={songs}/>
+        </main>
+        {/* 底部页脚 */}
+        <footer className="font-semibold text text-center fixed bottom-0 w-full p-4">
+          <p>欢迎来到 QinSemusic</p>
+        </footer>
+
+      {/* 手机布局(todo) */}
+
+        
+      </div>
+
   );
 };
 
