@@ -8,7 +8,6 @@ export default async function Page() {
   const updateAt = Date.now();
   const amount = 0;
   const description = "description";
-  const imgSrc = "/cover.jpg";
 
   return (
     <main className=" flex flex-col items-center px-40  pt-20">
@@ -17,7 +16,7 @@ export default async function Page() {
         space-x-20 pt-10"
       >
         <Suspense fallback={<CoverSkeleton />}>
-          <Cover src={imgSrc} />
+          <Cover />
         </Suspense>
         <div className=" flex min-h-full flex-grow flex-col space-y-5 py-10">
           <h1 className="text-5xl">Playlist</h1>
