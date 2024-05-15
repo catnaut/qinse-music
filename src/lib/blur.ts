@@ -1,6 +1,6 @@
 import { getPlaiceholder } from "plaiceholder";
 import fs from "node:fs/promises";
-
+import { cache } from "react";
 /**
  * @param src 格式 ./public/xxx.jpg
  * @returns dataUrl `data:image/png;base64,xxxxxx`
@@ -15,12 +15,9 @@ export const getLocalPlaceholder = async (src: string) => {
  * @param src 格式 https://xxx.com/xxx.jpg
  * @returns dataUrl `data:image/png;base64,xxxxxx`
  */
-export const getRemotePlaceholder = async (src: string) => {
-  const buffer = await fetch(src).then(async (res) =>
-    Buffer.from(await res.arrayBuffer()),
-  );
-
-  const { base64 } = await getPlaiceholder(buffer, { size: 12 });
-
+export const getRemotePlaceholder = cache(async (src: string) => {
+  const response = await fetch(src);
+  const buffer = await response.arrayBuffer();
+  const { base64 } = await getPlaiceholder(Buffer.from(buffer), { size: 12 });
   return base64;
-};
+});
