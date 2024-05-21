@@ -34,10 +34,10 @@ export default async function Page({ params }: { params: { id: string } }) {
       </div>
       <div className="max-w-4xl">
         <ScrollArea className=" h-96 w-full">
-          <ol className="list-none text-2xl text-muted-foreground">
+          <ol className="list-none px-14 text-2xl text-muted-foreground">
             {lyric.map((line: SongLyricLineType) => (
               <li key={line.time} className="flex justify-between">
-                <span className="pr-10">{line.time}</span>
+                <span className="pr-20">{line.time}</span>
                 <span className="flex-grow text-center">{line.text}</span>
               </li>
             ))}
