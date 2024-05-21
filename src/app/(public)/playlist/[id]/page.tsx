@@ -3,6 +3,7 @@ import { LikeButton, PlayButton } from "@/components/playlist/button.client";
 import { MoreMenu } from "@/components/playlist/button";
 import { getPlaylistInfoById } from "@/actions/playlist";
 import { SongTable } from "@/components/playlist/table.client";
+import { Badge } from "@/components/ui/badge";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const info = await getPlaylistInfoById(params.id);
@@ -17,7 +18,9 @@ export default async function Page({ params }: { params: { id: string } }) {
 
         <div className=" flex min-h-full flex-grow flex-col space-y-5 py-10">
           <h1 className="text-5xl">{info.title}</h1>
-          <p>{info.style}</p>
+          <span>
+            <Badge>{info.style}</Badge>
+          </span>
           {/* <p>By {author}</p> */}
           {/* <p>
             Update at {updateAt} - {amount} songs
