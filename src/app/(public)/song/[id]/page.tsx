@@ -32,7 +32,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           </div>
         </div>
       </div>
-      <div className="max-w-3xl">
+      <div className="max-w-4xl">
         <ScrollArea className=" h-96 w-full">
           <ol className="list-none text-2xl text-muted-foreground">
             {lyric.map((line: SongLyricLineType) => (
