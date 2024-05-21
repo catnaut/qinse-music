@@ -1,13 +1,7 @@
-import React from "react";
-import { SongCover } from "@/components/song/cover";
-import PageContent from "@/components/homepage/pagecontent";
-
 export default function Home() {
   return (
-    <main className=" flex flex-col items-center px-40  pt-20">
-      <div className="flex min-h-screen items-center justify-center bg-background p-5">
-        <PageContent />
-      </div>
+    <main className=" flex min-h-screen flex-col items-center justify-center">
+      <h1 className="text-4xl">Hello world</h1>
     </main>
   );
 }
