@@ -16,7 +16,6 @@ export const getPlaylistInfoById = async (
   const { data, state, ok } = await fetcher<PlaylistInfo>(
     `/songList/selectByPrimaryKey?id=${id}`,
   );
-  console.log(data, state, ok);
 
   if (!ok) {
     notFound();
@@ -28,7 +27,7 @@ export const getPlaylistSongsById = async (
   id: string,
 ): Promise<PlaylistSongs> => {
   const { data, state, ok } = await fetcher<PlaylistSongs>(
-    `/listSong/select/id?id=${id}`,
+    `/listSong/select/songListId?songListId=${id}`,
   );
   if (!ok) {
     notFound();

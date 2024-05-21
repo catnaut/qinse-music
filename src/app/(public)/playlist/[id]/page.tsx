@@ -2,6 +2,7 @@ import { PlayListCover } from "@/components/playlist/cover";
 import { LikeButton, PlayButton } from "@/components/playlist/button.client";
 import { MoreMenu } from "@/components/playlist/button";
 import { getPlaylistInfoById } from "@/actions/playlist";
+import { SongTable } from "@/components/playlist/table.client";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const info = await getPlaylistInfoById(params.id);
@@ -31,7 +32,9 @@ export default async function Page({ params }: { params: { id: string } }) {
           </div>
         </div>
       </div>
-      {/* TODO: 歌曲表格 */}
+      <div className="w-full">
+        <SongTable id={params.id} />
+      </div>
     </div>
   );
 }
