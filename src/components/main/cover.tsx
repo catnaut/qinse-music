@@ -26,7 +26,7 @@ export async function Cover({
         src={src}
         {...picSize}
         alt="cover"
-        className="relative rounded-lg object-contain"
+        className="relative -z-10 rounded-lg object-contain"
         placeholder="blur"
         blurDataURL={placeholder}
       />
@@ -34,7 +34,7 @@ export async function Cover({
         src={placeholder}
         alt="shadow"
         {...picSize}
-        className="scale-120 absolute left-2 top-2 -z-10 rounded-lg opacity-40
+        className="scale-120 absolute left-2 top-2 -z-20 rounded-lg opacity-40
         blur-lg transition group-hover:opacity-70"
       />
       {/* TODO: 接入客户端播放按键 */}
