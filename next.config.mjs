@@ -5,7 +5,7 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: process.env.IMAGE_HOSTNAME,
-        pathname: process.env.IMAGE_PATHNAME,
+        // pathname: process.env.IMAGE_PATHNAME,
       },
     ],
   },

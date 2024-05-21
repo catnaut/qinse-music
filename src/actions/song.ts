@@ -14,7 +14,16 @@ export const getSongById = async (id: string): Promise<Song> => {
   if (!ok) {
     notFound();
   }
-  return data;
+
+  const picUrl = data.pic.startsWith("/")
+    ? `${process.env.IMAGE_URL}${data.pic}`
+    : data.pic;
+
+  const result = {
+    ...data,
+    pic: picUrl,
+  };
+  return result;
 };
 
 export const getSongLyricById = async (id: string): Promise<SongLyric> => {

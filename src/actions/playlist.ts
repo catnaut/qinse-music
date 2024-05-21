@@ -20,7 +20,16 @@ export const getPlaylistInfoById = async (
   if (!ok) {
     notFound();
   }
-  return data;
+
+  const picUrl = data.pic.startsWith("/")
+    ? `${process.env.IMAGE_URL}${data.pic}`
+    : data.pic;
+
+  const result = {
+    ...data,
+    pic: picUrl,
+  };
+  return result;
 };
 
 export const getPlaylistSongsById = async (
