@@ -10,29 +10,30 @@ type Lyric = LyricSchemaType;
 type SongLyric = SongLyricSchemaType;
 
 export const getSongById = async (id: string): Promise<Song> => {
-  const { data, state, ok } = await fetcher<Song>(`/song/select/id?id=${id}`);
-  if (!ok) {
+  try {
+    const data = await fetcher<Song>(`/song/select/id?id=${id}`);
+    // 为了兼容后端返回的图片地址
+    // 如果图片地址以 / 开头，可以认为是图片在后端服务器上
+    const picUrl = data.pic.startsWith("/")
+      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${data.pic}`
+      : data.pic;
+
+    const result = {
+      ...data,
+      pic: picUrl,
+    };
+    return result;
+  } catch (error) {
     notFound();
   }
-
-  const picUrl = data.pic.startsWith("/")
-    ? `${process.env.IMAGE_URL}${data.pic}`
-    : data.pic;
-
-  const result = {
-    ...data,
-    pic: picUrl,
-  };
-  return result;
 };
 
 export const getSongLyricById = async (id: string): Promise<SongLyric> => {
-  const { data, state, ok } = await fetcher<Lyric>(
-    `/lyric/songLyric?songId=${id}`,
-  );
-  if (!ok) {
+  try {
+    const data = await fetcher<Lyric>(`/lyric/songLyric?songId=${id}`);
+    const result = parseLyric(data.lyric1);
+    return result;
+  } catch (error) {
     return [{ time: "00:00.000", text: "暂无歌词" }];
   }
-  const result = parseLyric(data.lyric1);
-  return result;
 };
