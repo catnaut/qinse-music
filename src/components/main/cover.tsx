@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export function Cover({
   src,
-  placeholder,
+  placeholder = "",
   size,
   button = false,
 }: {
@@ -25,7 +25,7 @@ export function Cover({
         {...picSize}
         alt="cover"
         className="relative -z-10 rounded-lg object-contain"
-        placeholder="blur"
+        placeholder={placeholder === "" ? "empty" : "blur"}
         blurDataURL={placeholder}
       />
       <Image
