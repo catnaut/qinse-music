@@ -11,6 +11,25 @@ class FetchError extends Error {
   }
 }
 
+export const clientFetcher: Fetcher = async (url) => {
+  const fetch_url = url.startsWith("/")
+    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${url}`
+    : url;
+
+  const res = await fetch(fetch_url);
+
+  if (!res.ok) {
+    const info = await res.json();
+    throw new FetchError(
+      "An error occurred while fetching the data.",
+      res.status,
+      info,
+    );
+  }
+
+  return res.json();
+};
+
 export const fetcher: Fetcher = async (url) => {
   const fetch_url = url.startsWith("/")
     ? `${process.env.BACKEND_URL}${url}`
