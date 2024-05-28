@@ -169,7 +169,6 @@ export function PlaylistButton() {
 
 export function SongInfo() {
   const song = usePlayerStore((state) => state.song);
-  console.log(song);
   return (
     <>
       {!song ? (

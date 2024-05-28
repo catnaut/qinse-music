@@ -30,7 +30,6 @@ export function PlayButton({ id }: { id: string }) {
 
   // TODO: 播放时间
   const handleClick = () => {
-    console.log("play", id);
     addSong(id);
   };
 
