@@ -93,6 +93,7 @@ const usePlayerStore = create<PlayerState & PlayerActions>()(
             .then(() =>
               set((state) => {
                 state.state = "play";
+                state.progress = 0;
               }),
             );
         },
