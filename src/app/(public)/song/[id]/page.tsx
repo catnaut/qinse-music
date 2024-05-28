@@ -1,6 +1,9 @@
 import { SongCover } from "@/components/song/cover";
 import { CoverSkeleton } from "@/components/main/cover";
-import { LikeButton, PlayButton } from "@/components/playlist/button.client";
+import {
+  LikeButton,
+  SongPlayButton,
+} from "@/components/playlist/button.client";
 import { MoreMenu } from "@/components/playlist/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { getSongById, getSongLyricById } from "@/actions/song";
@@ -26,7 +29,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             </p>
           </div>
           <div className="flex items-center justify-start space-x-2">
-            <PlayButton id={params.id} />
+            <SongPlayButton id={params.id} />
             <LikeButton />
             {/* <MoreMenu /> */}
           </div>

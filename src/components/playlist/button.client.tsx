@@ -25,12 +25,28 @@ export function LikeButton() {
   );
 }
 
-export function PlayButton({ id }: { id: string }) {
+export function SongPlayButton({ id }: { id: string }) {
   const addSong = usePlayerStore((state) => state.playSong);
 
   // TODO: 播放时间
   const handleClick = () => {
     addSong(id);
+  };
+
+  return (
+    <Button className="text-base" onClick={handleClick}>
+      <span className="icon-[material-symbols--play-arrow] mr-2 text-3xl" />
+      {/* TODO: 防抖 */}
+      Play
+    </Button>
+  );
+}
+
+export function PlaylistPlayButton({ id }: { id: string }) {
+  // const addSong = usePlayerStore((state) => state.playSong);
+
+  const handleClick = () => {
+    // addSong(id);
   };
 
   return (
