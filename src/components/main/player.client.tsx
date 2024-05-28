@@ -1,118 +1,80 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Button } from "../ui/button";
 import { Slider } from "@/components/ui/slider";
 import { toTime } from "@/lib/time";
 import { SongCover } from "@/components/main/cover.client";
-import { useSong } from "@/hooks/song";
 import Link from "next/link";
+import usePlayerStore from "@/stores/player";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function Player() {
-  const id = "12";
-  const { song, error, isLoading } = useSong(id);
-
-  const [time, setTime] = useState(0);
-  // 进度
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(100);
-
-  const [isPlaying, setIsPlaying] = useState(true);
-
-  const handleTimeChange = (value: number[]) => {
-    setTime(() => value[0]);
-  };
-
-  const handleTimeCommit = (value: number[]) => {
-    console.log(value);
-    setProgress(() => value[0]);
-  };
-
-  const handlePlay = () => {
-    setTime((s) => s + 10);
-  };
-
-  useEffect(() => {
-    if (!isPlaying) {
-      return;
-    } else if (time >= duration) {
-      setTime(0);
-    } else {
-      const interval = setInterval(() => {
-        setTime((s) => s + 1);
-      }, 1000);
-      return () => clearInterval(interval);
-    }
-  }, [isPlaying]);
-
   return (
     <div
-      className="flex h-20  items-center  justify-between space-x-5 rounded 
+      className="flex h-20  items-center  justify-between space-x-5 rounded
     bg-primary-foreground px-20 backdrop-blur"
     >
       <div className="flex flex-1 items-center space-x-5">
-        <Link href={`/song/${id}`}>
-          <SongCover id={id} size={60} />
-        </Link>
-
-        <div className="flex flex-col">
-          <Button variant={"link"} className="pl-0" asChild>
-            <Link
-              className="text-xl underline-offset-4  hover:underline"
-              href={`/song/${id}`}
-            >
-              {song?.name}
-            </Link>
-          </Button>
-          <span>{song?.singer.name}</span>
-        </div>
+        <SongInfo />
       </div>
 
       <div className="flex grow flex-col items-center justify-center pt-4">
-        <div className="flex grow items-center justify-center space-x-5">
-          <span>{toTime(time)}</span>
-          <Slider
-            value={[time]}
-            max={duration}
-            step={1}
-            onValueChange={handleTimeChange}
-            onValueCommit={handleTimeCommit}
-            className="w-80"
-          />
-          <span>{toTime(duration)}</span>
-        </div>
-        <div className="flex items-center justify-center space-x-5">
-          <PlayButton onClick={handlePlay} />
-        </div>
+        <Progress />
+        <ControlButtons />
       </div>
 
       <div className="flex flex-1 items-center justify-end space-x-5">
         <VolumeButton />
-
-        <Button variant={"ghost"} size={"icon"}>
-          <span
-            className="icon-[material-symbols--playlist-play-rounded]
-            text-3xl"
-          />
-        </Button>
+        <PlaylistButton />
       </div>
     </div>
   );
 }
 
-export function VolumeButton() {
-  const [state, setState] = useState(true);
+export function Progress() {
+  // time 用于显示, progress 是音乐播放进度
+  const time = usePlayerStore((state) => state.time);
+  const progress = usePlayerStore((state) => state.progress);
+  const duration = usePlayerStore((state) => state.duration);
+  const setTime = usePlayerStore((state) => state.setTime);
+  const setProgress = usePlayerStore((state) => state.setProgress);
 
-  const handleClick = () => {
-    setState((s) => !s);
+  const handleTimeChange = (value: number[]) => {
+    setTime(value[0]);
   };
+
+  const handleTimeCommit = (value: number[]) => {
+    setProgress(value[0]);
+  };
+
+  return (
+    <div className="flex grow items-center justify-center space-x-5">
+      <span>{toTime(progress)}</span>
+      <Slider
+        value={[time]}
+        max={duration}
+        step={1}
+        onValueChange={handleTimeChange}
+        onValueCommit={handleTimeCommit}
+        className="w-80"
+      />
+      <span>{toTime(duration)}</span>
+    </div>
+  );
+}
+
+export function VolumeButton() {
+  const volume = usePlayerStore((state) => state.volume);
+  const muteToggle = usePlayerStore((state) => state.muteToggle);
+
   return (
     <Button
       className="text-base"
       variant={"ghost"}
       size={"icon"}
-      onClick={handleClick}
+      onClick={muteToggle}
     >
-      {state ? (
+      {volume > 0 ? (
         <span
           className="icon-[material-symbols--volume-up-rounded]
           text-3xl"
@@ -127,17 +89,29 @@ export function VolumeButton() {
   );
 }
 
-export function PlayButton({ onClick }: { onClick: () => void }) {
-  const [state, setState] = useState(true);
+export function ControlButtons() {
+  const state = usePlayerStore((state) => state.state);
+  const toggle = usePlayerStore((state) => state.toggle);
+  const prev = usePlayerStore((state) => state.prev);
+  const next = usePlayerStore((state) => state.next);
 
-  const handleClick = () => {
-    setState((s) => !s);
-  };
+  const increment = usePlayerStore((state) => state.increment);
 
-  // TODO: 播放时间
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (state !== "play") return;
+      increment();
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [state, increment]);
   return (
-    <>
-      <Button className="text-base" variant={"ghost"} size={"icon"}>
+    <div className="flex items-center justify-center space-x-5">
+      <Button
+        className="text-base"
+        variant={"ghost"}
+        size={"icon"}
+        onClick={prev}
+      >
         <span
           className="icon-[material-symbols--skip-previous-rounded]
           text-3xl"
@@ -147,12 +121,9 @@ export function PlayButton({ onClick }: { onClick: () => void }) {
         className="text-base"
         variant={"ghost"}
         size={"icon"}
-        onClick={() => {
-          handleClick();
-          onClick();
-        }}
+        onClick={toggle}
       >
-        {state ? (
+        {state === "pause" ? (
           <span
             className="icon-[material-symbols--play-arrow-rounded]
             text-3xl transition"
@@ -164,12 +135,65 @@ export function PlayButton({ onClick }: { onClick: () => void }) {
           />
         )}
       </Button>
-      <Button className="text-base" variant={"ghost"} size={"icon"}>
+      <Button
+        className="text-base"
+        variant={"ghost"}
+        size={"icon"}
+        onClick={next}
+      >
         <span
           className="icon-[material-symbols--skip-next-rounded]
           text-3xl"
         />
       </Button>
+    </div>
+  );
+}
+
+export function PlaylistButton() {
+  return (
+    <Button variant={"ghost"} size={"icon"}>
+      <span
+        className="icon-[material-symbols--playlist-play-rounded]
+        text-3xl"
+      />
+    </Button>
+  );
+}
+
+export function SongInfo() {
+  const song = usePlayerStore((state) => state.song);
+  console.log(song);
+  return (
+    <>
+      {!song ? (
+        <Skeleton className="h-[60px] w-[60px] rounded-lg" />
+      ) : (
+        <Link href={`/song/${song.id}`}>
+          <SongCover id={`${song.id}`} size={60} />
+        </Link>
+      )}
+
+      <div className="flex flex-col">
+        <Button variant={"link"} className="pl-0" asChild>
+          {!song ? (
+            <>
+              <span>暂无歌曲</span>
+              <span></span>
+            </>
+          ) : (
+            <>
+              <Link
+                className="text-xl underline-offset-4  hover:underline"
+                href={`/song/${song.id}`}
+              >
+                {song?.name}
+              </Link>
+              <span>{song.singer.name}</span>
+            </>
+          )}
+        </Button>
+      </div>
     </>
   );
 }
