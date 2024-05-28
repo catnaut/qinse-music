@@ -151,8 +151,14 @@ export function ControlButtons() {
 }
 
 export function PlaylistButton() {
+  const removeSong = usePlayerStore((state) => state.removeSong);
+  const handleClick = () => {
+    // 随便传一个 id
+    removeSong("");
+  };
+
   return (
-    <Button variant={"ghost"} size={"icon"}>
+    <Button variant={"ghost"} size={"icon"} onClick={handleClick}>
       <span
         className="icon-[material-symbols--playlist-play-rounded]
         text-3xl"

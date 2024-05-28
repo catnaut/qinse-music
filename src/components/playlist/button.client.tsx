@@ -2,8 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 
-import { Share, Star, Play } from "lucide-react";
 import { useState } from "react";
+import usePlayerStore from "@/stores/player";
 
 export function LikeButton() {
   // TODO: API 数据
@@ -25,10 +25,17 @@ export function LikeButton() {
   );
 }
 
-export function PlayButton() {
+export function PlayButton({ id }: { id: string }) {
+  const addSong = usePlayerStore((state) => state.playSong);
+
   // TODO: 播放时间
+  const handleClick = () => {
+    console.log("play", id);
+    addSong(id);
+  };
+
   return (
-    <Button className="text-base">
+    <Button className="text-base" onClick={handleClick}>
       <span className="icon-[material-symbols--play-arrow] mr-2 text-3xl" />
       {/* TODO: 防抖 */}
       Play

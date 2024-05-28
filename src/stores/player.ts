@@ -3,6 +3,7 @@ import { persist, devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { SongSchemaType } from "@/definitions/song";
 import { PlaylistSchemaType } from "@/definitions/playlist";
+import { clientFetcher } from "@/lib/api";
 
 type Song = SongSchemaType;
 
@@ -26,6 +27,9 @@ type PlayerActions = {
   setProgress: (progress: number) => void;
   setTime: (time: number) => void;
   increment: () => void;
+  playSong: (songId: string) => void;
+  removeSong: (songId: string) => void; // 暂时直接删除歌曲
+  fetchSong: (songId: string) => Promise<void>;
 };
 
 const usePlayerStore = create<PlayerState & PlayerActions>()(
@@ -70,6 +74,26 @@ const usePlayerStore = create<PlayerState & PlayerActions>()(
           set((state) => {
             state.time += 1;
             state.progress += 1;
+          });
+        },
+        playSong: (id) => {
+          get()
+            .fetchSong(id)
+            .then(() =>
+              set((state) => {
+                state.state = "play";
+              }),
+            );
+        },
+        removeSong: (id) => {
+          set((state) => {
+            state.song = undefined;
+          });
+        },
+        fetchSong: async (id) => {
+          const data = await clientFetcher<Song>(`/song/select/id?id=${id}`);
+          set((state) => {
+            state.song = data;
           });
         },
       })),

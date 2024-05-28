@@ -26,7 +26,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             </p>
           </div>
           <div className="flex items-center justify-start space-x-2">
-            <PlayButton />
+            <PlayButton id={params.id} />
             <LikeButton />
             {/* <MoreMenu /> */}
           </div>
