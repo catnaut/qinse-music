@@ -5,6 +5,7 @@ import "./globals.css";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Nav, Search } from "@/components/main/navbar";
+import { Player } from "@/components/main/player.client";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <Header />
         {children}
+        <div className="fixed bottom-0 w-screen">
+          <Player />
+        </div>
       </body>
     </html>
   );
@@ -30,7 +34,10 @@ export default function RootLayout({
 
 function Header() {
   return (
-    <header className=" fixed flex h-20 w-full items-center bg-background px-20">
+    <header
+      className="fixed flex h-20 w-full items-center
+      bg-background px-20"
+    >
       <div className="flex-1">
         <Nav />
       </div>

@@ -10,5 +10,5 @@ export function SongCover({ size, id }: { size: number; id: string }) {
   if (error) return <p>Error: {error.message}</p>;
   else if (isLoading) return <CoverSkeleton size={size} />;
 
-  return <Cover size={size} src={song!.pic} placeholder={""} button />;
+  return <Cover size={size} src={song!.pic} placeholder={""} />;
 }
