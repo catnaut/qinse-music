@@ -30,7 +30,7 @@ export async function SongTable({ id }: { id: string }) {
         {songs.map((song: SongSchemaType) => (
           <TableRow key={song.id}>
             <TableCell className="font-medium">{song.name}</TableCell>
-            <TableCell>{song.singerId}</TableCell>
+            <TableCell>{song.singer.name}</TableCell>
             {/* <TableCell>{song.albumId}</TableCell>
             <TableCell>{song.duration}</TableCell> */}
             <TableCell>

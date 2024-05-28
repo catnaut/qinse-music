@@ -1,6 +1,9 @@
 import { SongCover } from "@/components/song/cover";
 import { CoverSkeleton } from "@/components/main/cover";
-import { LikeButton, PlayButton } from "@/components/playlist/button.client";
+import {
+  LikeButton,
+  SongPlayButton,
+} from "@/components/playlist/button.client";
 import { MoreMenu } from "@/components/playlist/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { getSongById, getSongLyricById } from "@/actions/song";
@@ -20,13 +23,13 @@ export default async function Page({ params }: { params: { id: string } }) {
         <div className="flex  flex-col space-y-8 py-10 pt-5">
           <h1 className="text-5xl">{song.name}</h1>
           <div className="flex flex-col space-y-2">
-            <p>By {song.singerId}</p>
+            <p>By {song.singer.name}</p>
             <p className="line-clamp-3 max-w-xl	 text-ellipsis">
               {song.introduction}
             </p>
           </div>
           <div className="flex items-center justify-start space-x-2">
-            <PlayButton />
+            <SongPlayButton id={params.id} />
             <LikeButton />
             {/* <MoreMenu /> */}
           </div>

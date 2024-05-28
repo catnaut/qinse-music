@@ -1,9 +1,10 @@
 import { z } from "zod";
 import { IdSchema } from "./id";
+import { SingerSchema } from "./singer";
 
 export const SongSchema = z.object({
   id: IdSchema,
-  singerId: IdSchema,
+  singer: SingerSchema,
   name: z.string(),
   introduction: z.string(),
   createTime: z.string().datetime(),

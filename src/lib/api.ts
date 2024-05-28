@@ -1,11 +1,50 @@
-type Fetcher = <T>(
-  url: string,
-) => Promise<{ data: T; state: number; ok: boolean }>;
+type Fetcher = <T>(url: string) => Promise<T>;
 
-export const fetcher: Fetcher = async <T>(url: string) => {
-  const res = await fetch(`${process.env.BACKEND_URL}${url}`);
-  const data = await res.json();
-  const state = res.status;
-  const ok = res.ok;
-  return { data, state, ok };
+class FetchError extends Error {
+  status: number;
+  info: any;
+
+  constructor(message: string, status: number, info: any) {
+    super(message);
+    this.status = status;
+    this.info = info;
+  }
+}
+
+export const clientFetcher: Fetcher = async (url) => {
+  const fetch_url = url.startsWith("/")
+    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${url}`
+    : url;
+
+  const res = await fetch(fetch_url);
+
+  if (!res.ok) {
+    const info = await res.json();
+    throw new FetchError(
+      "An error occurred while fetching the data.",
+      res.status,
+      info,
+    );
+  }
+
+  return res.json();
+};
+
+export const fetcher: Fetcher = async (url) => {
+  const fetch_url = url.startsWith("/")
+    ? `${process.env.BACKEND_URL}${url}`
+    : url;
+
+  const res = await fetch(fetch_url);
+
+  if (!res.ok) {
+    const info = await res.json();
+    throw new FetchError(
+      "An error occurred while fetching the data.",
+      res.status,
+      info,
+    );
+  }
+
+  return res.json();
 };

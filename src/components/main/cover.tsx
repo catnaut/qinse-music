@@ -1,12 +1,10 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { getRemotePlaceholder } from "@/lib/blur";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getSongById } from "@/actions/song";
 
-export async function Cover({
+export function Cover({
   src,
-  placeholder,
+  placeholder = "",
   size,
   button = false,
 }: {
@@ -27,7 +25,7 @@ export async function Cover({
         {...picSize}
         alt="cover"
         className="relative -z-10 rounded-lg object-contain"
-        placeholder="blur"
+        placeholder={placeholder === "" ? "empty" : "blur"}
         blurDataURL={placeholder}
       />
       <Image

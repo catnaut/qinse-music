@@ -1,5 +1,8 @@
 import { PlayListCover } from "@/components/playlist/cover";
-import { LikeButton, PlayButton } from "@/components/playlist/button.client";
+import {
+  LikeButton,
+  PlaylistPlayButton,
+} from "@/components/playlist/button.client";
 import { MoreMenu } from "@/components/playlist/button";
 import { getPlaylistInfoById } from "@/actions/playlist";
 import { SongTable } from "@/components/playlist/table.client";
@@ -29,7 +32,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             {info.introduction}
           </p>
           <div className="flex items-center justify-start space-x-2">
-            <PlayButton />
+            <PlaylistPlayButton id={params.id} />
             <LikeButton />
             {/* <MoreMenu /> */}
           </div>
