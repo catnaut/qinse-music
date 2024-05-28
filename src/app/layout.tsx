@@ -36,7 +36,7 @@ function Header() {
   return (
     <header
       className="fixed flex h-20 w-full items-center
-      bg-background px-20"
+      bg-background px-20 z-50"
     >
       <div className="flex-1">
         <Nav />
