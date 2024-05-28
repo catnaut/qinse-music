@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import PlayIcon from "@/components/homepage/playicon";
 
 const PageContent: React.FC = () => {
   return (
@@ -17,20 +18,7 @@ const PageContent: React.FC = () => {
                     className="h-full w-full object-cover"
                   />
                   <div className="absolute inset-0 flex items-center justify-center bg-foreground/20 bg-opacity-50 opacity-0 transition-opacity duration-300 hover:opacity-100">
-                    <svg
-                      /*xmlns="http://www.w3.org/2000/svg"*/
-                      className="h-12 w-12 text-background"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 12l-9-6v12l9-6z"
-                      />
-                    </svg>
+                    <PlayIcon />
                   </div>
                 </div>
               </Link>
@@ -49,20 +37,7 @@ const PageContent: React.FC = () => {
                     className="h-full w-full object-cover"
                   />
                   <div className="absolute inset-0 flex items-center justify-center bg-foreground/20 bg-opacity-50 opacity-0 transition-opacity duration-300 hover:opacity-100">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-12 w-12 text-background"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 12l-9-6v12l9-6z"
-                      />
-                    </svg>
+                    <PlayIcon />
                   </div>
                 </div>
               </Link>
