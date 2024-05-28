@@ -60,10 +60,10 @@ export function Player() {
               className="text-xl underline-offset-4  hover:underline"
               href={`/song/${id}`}
             >
-              {song?.name || "Loading"}
+              {song?.name}
             </Link>
           </Button>
-          <span>{song?.singerId || ""}</span>
+          <span>{song?.singer.name}</span>
         </div>
       </div>
 

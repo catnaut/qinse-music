@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         <div className="flex  flex-col space-y-8 py-10 pt-5">
           <h1 className="text-5xl">{song.name}</h1>
           <div className="flex flex-col space-y-2">
-            <p>By {song.singerId}</p>
+            <p>By {song.singer.name}</p>
             <p className="line-clamp-3 max-w-xl	 text-ellipsis">
               {song.introduction}
             </p>
