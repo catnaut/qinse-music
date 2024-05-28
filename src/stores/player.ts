@@ -71,6 +71,17 @@ const usePlayerStore = create<PlayerState & PlayerActions>()(
           });
         },
         increment: () => {
+          if (get().state !== "play") return;
+
+          if (get().progress >= get().duration) {
+            // 播放结束
+            // TODO: 播放下一首
+            set((state) => {
+              state.state = "pause";
+            });
+            return;
+          }
+
           set((state) => {
             state.time += 1;
             state.progress += 1;

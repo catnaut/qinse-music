@@ -99,11 +99,10 @@ export function ControlButtons() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (state !== "play") return;
       increment();
     }, 1000);
     return () => clearInterval(interval);
-  }, [state, increment]);
+  }, [increment]);
   return (
     <div className="flex items-center justify-center space-x-5">
       <Button
